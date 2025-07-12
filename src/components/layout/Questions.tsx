@@ -9,7 +9,7 @@ const Questions = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    
     reset,
   } = useForm<QuestionsValues>({
     resolver: zodResolver(QuestionsSchema),

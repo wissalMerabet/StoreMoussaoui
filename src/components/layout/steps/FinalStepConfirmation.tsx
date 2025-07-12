@@ -10,9 +10,9 @@ const FinalStepConfirmation = () => {
         <div className="bg-white shadow-md h-[300px] w-[269px] md:w-[620px]  md:h-[310px] flex flex-col items-center justify-center py-6 px-9 md:px-6">
           <TbChecks className="text-[#26B34E] text-7xl" />
           <p className="mb-6 text-primary text-lg font-medium md:text-2xl">
-            Votre réservation a été confirmée avec succès !
+            Votre r&apos;servation a &apos;t&apos; confirm&apos;e avec succes !
           </p>
-          <p className="text-sm md:text-lg">Merci de avoir réservé avec nous.</p>
+          <p className="text-sm md:text-lg">Merci de avoir r&apos;serv&apos; avec nous.</p>
         </div>
 
         <button
@@ -23,7 +23,7 @@ const FinalStepConfirmation = () => {
             size={20}
             className="transition-transform duration-300 group-hover:-translate-x-1 group-hover:text-white"
           />
-          A'accueil
+          accueil
           <RiHomeLine
             size={20}
             className="transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white"

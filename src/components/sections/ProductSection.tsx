@@ -17,7 +17,7 @@ const ProductSection = () => {
     async function fetchProducts() {
       try {
         const data :Product[] = await getAllProducts();
-        //console.log("Products fetched:", data);
+        console.log(data)
         const topProducts = data.slice(0, 8);
         setProducts(topProducts);
         setLoading(false);
