@@ -6,12 +6,12 @@ import { NewsLetterValues } from "@/types";
 import { NewsLetterSchema } from "@/validation/NewsLetter";
 
 const NewsLetterForm = () => {
-   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+   const [errorMessage] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    
   } = useForm<NewsLetterValues>({
     resolver: zodResolver(NewsLetterSchema),
     defaultValues: { email: "" },
