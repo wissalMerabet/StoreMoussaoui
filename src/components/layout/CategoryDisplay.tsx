@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+
 import Link from "next/link";
 import { IoFilterSharp } from "react-icons/io5";
 import { BsChevronLeft } from "react-icons/bs";
@@ -15,7 +15,7 @@ import Reveal from "@/components/layout/Reveal";
 
 import { scrollSpeed, SORT_OPTIONS, textScroll } from "@/constants/data";
 import { Product } from "@/types";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import FilterSidebar from "./FilterSidebar";
 import { getAllProducts } from "@/app/(home)/products/actions";
 

@@ -12,7 +12,7 @@ const FinalStepConfirmation = () => {
           <p className="mb-6 text-primary text-lg font-medium md:text-2xl">
             Votre réservation a été confirmée avec succès !
           </p>
-          <p className="text-sm md:text-lg">Merci d'avoir réservé avec nous.</p>
+          <p className="text-sm md:text-lg">Merci de avoir réservé avec nous.</p>
         </div>
 
         <button

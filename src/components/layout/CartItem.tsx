@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useCart } from "@/context/CartContext";
 

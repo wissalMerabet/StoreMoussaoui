@@ -7,8 +7,7 @@ import { MdOutlineAddBox } from "react-icons/md";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Product } from "@/types";
 import { slugify } from "@/lib/utils";
-import Image from "next/image";
-import { Button } from "../ui/button";
+
 import { useCart } from "@/context/CartContext";
 import MagicZoom from "./MagicZoom";
 

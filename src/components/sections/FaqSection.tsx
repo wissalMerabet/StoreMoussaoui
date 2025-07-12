@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+
 import Accordion from "../layout/Accordion";
 import { accordionItems } from "@/constants/data";
 import Questions from "../layout/Questions";
