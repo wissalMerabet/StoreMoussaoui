@@ -22,15 +22,46 @@ import FilterSidebar from "@/components/layout/FilterSidebar";
 
 import { SORT_OPTIONS, scrollSpeed, textScroll } from "@/constants/data";
 
+// Extract filter options from API
+function extractUniqueFilterValues(products: Product[]) {
+  const goldTypes = new Set<string>();
+  const brands = new Set<string>();
+  const categories = new Set<string>();
 
+  categories.add("Bijoux");
+
+  products.forEach((product) => {
+    if (product.gold_type?.name) goldTypes.add(product.gold_type.name);
+    if (product.brand?.name) brands.add(product.brand.name);
+    if (product.category?.name) categories.add(product.category.name);
+  });
+
+  return {
+    goldTypes: Array.from(goldTypes),
+    brands: Array.from(brands),
+    categories: Array.from(categories),
+  };
+}
+
+const PRICE_RANGES = [
+  { label: "Petits prix", min: 0, max: 30000 },
+  { label: "Entre 30 000 DA et 80 000 DA", min: 30000, max: 80000 },
+  { label: "Entre 80 000 DA et 120 000 DA", min: 80000, max: 120000 },
+  { label: "Entre 120 000 DA et 200 000 DA", min: 120000, max: 200000 },
+  { label: "Plus de 200 000 DA", min: 200000, max: Infinity },
+];
 
 export default function Page() {
   const params = useParams();
-  
   const category = (params?.category as string) ?? "";
 
   const [products, setProducts] = useState<Product[]>([]);
   const [latestProducts, setLatestProducts] = useState<Product[]>([]);
+  const [filterOptions, setFilterOptions] = useState({
+    goldTypes: [] as string[],
+    brands: [] as string[],
+    categories: [] as string[],
+  });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [showSort, setShowSort] = useState(false);
 
@@ -49,10 +80,12 @@ export default function Page() {
       }
 
       setProducts(filtered);
+      setFilterOptions(extractUniqueFilterValues(allProducts));
 
       const topProducts = allProducts
-        .sort((a: Product, b: Product) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        .sort(
+          (a: Product, b: Product) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         )
         .slice(0, 10);
 
@@ -103,6 +136,7 @@ export default function Page() {
             FILTRES
             {isFilterOpen ? <FiMinus size={20} /> : <FiPlus size={20} />}
           </button>
+
           <div className="relative">
             <button
               onClick={() => setShowSort((prev) => !prev)}
@@ -117,7 +151,11 @@ export default function Page() {
                 {SORT_OPTIONS.map(({ label, value }) => (
                   <button
                     key={value}
-                    className="w-full px-4 py-2 text-sm text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 uppercase"
+                    className="w-full px-4 py-2 text-sm text-left hover:bg-gray-100 focus:outline-none uppercase"
+                    onClick={() => {
+                      // implement sort logic if needed
+                      setShowSort(false);
+                    }}
                   >
                     {label}
                   </button>
@@ -131,6 +169,12 @@ export default function Page() {
           <FilterSidebar
             isOpen={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}
+            filters={{
+              prix: PRICE_RANGES.map((r) => r.label),
+              categories: filterOptions.categories,
+              goldTypes: filterOptions.goldTypes,
+              marques: filterOptions.brands,
+            }}
           />
         )}
 
@@ -140,9 +184,7 @@ export default function Page() {
             {products.map((product) => (
               <Link
                 key={product.id}
-                href={`/products/${slugify(categoryTitle)}/${slugify(
-                  product.name
-                )}-${product.id}`}
+                href={`/products/${slugify(categoryTitle)}/${product.id}`}
               >
                 <Card product={product} />
               </Link>

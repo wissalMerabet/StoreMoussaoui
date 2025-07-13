@@ -42,9 +42,6 @@ function extractUniqueFilterValues(products: Product[]) {
     if (product.category?.name) categories.add(product.category.name);
   });
 
-  
-  
-
   return {
     goldTypes: Array.from(goldTypes),
     brands: Array.from(brands),
@@ -84,7 +81,7 @@ const ProductsClient = () => {
 
         const dynamicFilters = extractUniqueFilterValues(topProducts);
         setFilterOptions(dynamicFilters);
-        
+
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -121,9 +118,7 @@ const ProductsClient = () => {
           case "prix": {
             const price = Number(product.fixed_price);
             return values.some((slug) => {
-              const range = PRICE_RANGES.find(
-                (r) => slugify(r.label) === slug
-              );
+              const range = PRICE_RANGES.find((r) => slugify(r.label) === slug);
               return range ? price >= range.min && price <= range.max : true;
             });
           }
@@ -209,10 +204,16 @@ const ProductsClient = () => {
 
         {isFilterOpen && (
           <FilterSidebar
-            isOpen={isFilterOpen}
-            onClose={() => setIsFilterOpen(false)}
-            
-          />
+  isOpen={isFilterOpen}
+  onClose={() => setIsFilterOpen(false)}
+  filters={{
+    prix: PRICE_RANGES.map((r) => r.label),
+    categories: filterOptions.categories,
+    goldTypes: filterOptions.goldTypes,
+    marques: filterOptions.brands,
+  }}
+/>
+
         )}
 
         {/* Products */}
