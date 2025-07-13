@@ -84,7 +84,7 @@ const ProductScrollBar = ({ products }: ProductScrollBarProps) => {
               className="product-card snap-start w-[180px] sm:w-[220px] md:w-[260px] lg:w-[300px] flex-shrink-0"
             >
               <Link
-                href={`/products/${slugify(product.category?.name)}/${slugify(product.name)}-${product.id}`}
+                href={`/products/${slugify(product.category?.name)}/${product.id}`}
               >
                 <Card product={product} />
               </Link>

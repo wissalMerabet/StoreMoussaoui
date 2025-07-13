@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface MagicZoomProps {
   src: string;
@@ -80,11 +81,15 @@ export default function MagicZoom({
           backgroundPosition: backgroundPos,
         }}
       >
-        <img
-          src={src}
-          alt={alt}
-          className="opacity-0 w-full h-full pointer-events-none"
-        />
+        <div className="relative w-full aspect-square">
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="opacity-0 pointer-events-none object-cover"
+            priority
+          />
+        </div>
       </div>
     </div>
   );

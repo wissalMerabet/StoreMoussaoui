@@ -44,9 +44,7 @@ const ProductSection = () => {
               return (
                 <Link
                   key={product.id}
-                  href={`/products/${slugify(product.category?.name)}/${slugify(
-                    product.name
-                  )}-${product.id}`}
+                  href={`/products/${slugify(product.category?.name)}/${product.id}`}
                 >
                   <Card product={product} />
                 </Link>

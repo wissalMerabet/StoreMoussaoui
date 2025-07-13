@@ -9,7 +9,7 @@ const NewsLetterForm = () => {
    const [errorMessage] = useState<string | null>(null);
   const {
     register,
-    handleSubmit,
+    
     formState: { errors },
     
   } = useForm<NewsLetterValues>({
@@ -17,10 +17,10 @@ const NewsLetterForm = () => {
     defaultValues: { email: "" },
   });
 
-  const onSubmit = async (data: NewsLetterValues) => {};
+
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col space-y-2' action="">
+    <form  className='flex flex-col space-y-2' action="">
       <div className='flex flex-col '>
         <input
           type="email"
