@@ -2,10 +2,9 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-import { Button } from "../ui/button";
 import { slugify } from "@/lib/utils";
 import { FilterOptions } from "./FilterOptions";
+import { Button } from "../ui/button";
 
 interface FilterSidebarProps {
   isOpen: boolean;
@@ -15,25 +14,32 @@ interface FilterSidebarProps {
     categories: string[];
     goldTypes: string[];
     marques: string[];
-    //types: string[];
   };
 }
 
-export default function FilterSidebar({ isOpen, onClose, filters }: FilterSidebarProps) {
+export default function FilterSidebar({
+  isOpen,
+  onClose,
+  filters,
+}: FilterSidebarProps) {
+  
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
-  const isCategoryPage = pathname.startsWith("/products/") && pathname.split("/").length > 2;
+  const isCategoryPage =
+    pathname.startsWith("/products/") && pathname.split("/").length > 2;
   const showCategoryFilter = !isCategoryPage;
 
-  const allFilterTabs = useMemo(() => [
-    { title: "Prix", options: filters.prix },
-    { title: "Catégories", options: filters.categories },
-    { title: "Type d’or", options: filters.goldTypes },
-    { title: "Marque", options: filters.marques },
-    //{ title: "Type", options: filters.types },
-  ], [filters]);
+  const allFilterTabs = useMemo(
+    () => [
+      { title: "Prix", options: filters.prix },
+      { title: "Catégories", options: filters.categories },
+      { title: "Type d’or", options: filters.goldTypes },
+      { title: "Marque", options: filters.marques },
+    ],
+    [filters]
+  );
 
   const filteredTabs = useMemo(() => {
     return allFilterTabs.filter(
@@ -41,8 +47,12 @@ export default function FilterSidebar({ isOpen, onClose, filters }: FilterSideba
     );
   }, [allFilterTabs, showCategoryFilter]);
 
-  const [activeTab, setActiveTab] = useState(() => filteredTabs[0]?.title || "");
-  const [selectedFilters, setSelectedFilters] = useState<{ [key: string]: string[] }>({});
+  const [activeTab, setActiveTab] = useState(
+    () => filteredTabs[0]?.title || ""
+  );
+  const [selectedFilters, setSelectedFilters] = useState<{
+    [key: string]: string[];
+  }>({});
   const [containerHeight, setContainerHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -84,47 +94,46 @@ export default function FilterSidebar({ isOpen, onClose, filters }: FilterSideba
   };
 
   const clearFilters = () => {
-  const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams.toString());
+    filteredTabs.forEach((filter) => {
+      params.delete(slugify(filter.title));
+    });
 
-  // Remove only filter-related keys
-  filteredTabs.forEach((filter) => {
-    params.delete(slugify(filter.title));
-  });
-
-  replace(`${pathname}?${params.toString()}`);
-  setSelectedFilters({});
-  onClose();
-};
-
+    replace(`${pathname}?${params.toString()}`);
+    setSelectedFilters({});
+    onClose();
+  };
 
   const applyFilters = () => {
-  const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
+    Object.entries(selectedFilters).forEach(([key, values]) => {
+      if (Array.isArray(values) && values.length > 0) {
+        params.set(key, values.join(","));
+      } else {
+        params.delete(key);
+      }
+    });
 
-  Object.entries(selectedFilters).forEach(([key, values]) => {
-  if (Array.isArray(values) && values.length > 0) {
-    params.set(key, values.join(","));
-  }
-});
-
-
-  replace(`${pathname}?${params.toString()}`);
-  onClose();
-};
-
+    replace(`${pathname}?${params.toString()}`);
+    onClose();
+  };
 
   return (
-    <div className="overflow-hidden transition-all duration-500 mt-8" style={{ height: containerHeight }}>
+    <div
+      className="overflow-hidden transition-all duration-500 mt-8"
+      style={{ height: containerHeight }}
+    >
       <div
         ref={contentRef}
         className="container mx-auto flex h-[400px] rounded-lg border border-[#D9D9D9] shadow-md"
       >
         {/* Tabs */}
-        <aside className="w-[342px] bg-[#F3F3F3] flex flex-col items-start">
+        <aside className="w-[180px] md:w-[342px] bg-[#F3F3F3] flex flex-col items-start">
           {filteredTabs.map(({ title }) => (
             <button
               key={title}
               onClick={() => setActiveTab(title)}
-              className={`w-full px-8 py-3 text-start text-sm font-medium ${
+              className={`w-full px-3 md:px-8 py-3 text-start text-xs md:text-sm font-medium ${
                 activeTab === title ? "bg-white" : ""
               }`}
             >
@@ -134,8 +143,10 @@ export default function FilterSidebar({ isOpen, onClose, filters }: FilterSideba
         </aside>
 
         {/* Filter Options */}
-        <section className="relative w-full p-5">
-          <h4 className="mb-2 text-sm font-semibold capitalize">{activeFilter?.title}</h4>
+        <section className="relative w-full p-2 md:p-5">
+          <h4 className="mb-2 text-xs md:text-sm font-semibold capitalize">
+            {activeFilter?.title}
+          </h4>
 
           <FilterOptions
             filter={activeFilter?.title || ""}
@@ -144,19 +155,11 @@ export default function FilterSidebar({ isOpen, onClose, filters }: FilterSideba
             onChange={handleCheckboxChange}
           />
 
-          <div className="absolute bottom-6 right-6 flex gap-4">
-            <Button
-              variant="ghost"
-              className="px-6 text-muted-foreground border border-border hover:bg-muted"
-              onClick={clearFilters}
-            >
+          <div className="absolute bottom-6 right-2 sm:right-6 flex gap-2">
+            <Button variant={"outline"} className=" px-2 sm:px-6 " onClick={clearFilters} >
               Clear
             </Button>
-            <Button
-              onClick={applyFilters}
-              variant="ghost"
-              className="px-12 text-primary border border-primary hover:bg-primary hover:text-white"
-            >
+            <Button onClick={applyFilters} className="px-3 sm:px-12">
               Filter
             </Button>
           </div>

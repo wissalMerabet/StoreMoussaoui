@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import CartItem from "@/components/layout/CartItem"; 
+import CartItem from "@/components/layout/CartItem";
 
 import { BsChevronLeft } from "react-icons/bs";
 import { FiShoppingBag } from "react-icons/fi";
-
+import { Button } from "@/components/ui/button";
 
 const Page = () => {
   const { items, totalPrice } = useCart();
@@ -32,34 +32,37 @@ const Page = () => {
         </div>
       </nav>
 
-      <div className="container mx-auto md:px-8 lg:px-4 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-12 items-start mt-20">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mt-12">
           {/* Cart Items */}
-          <div>
-            <h1 className="font-bold text-lg md:text-2xl mb-6 leading-[30px] px-4">
-              Récapitulatif Commande
+          <div className="w-full max-w-[800px] mx-auto">
+            <h1 className="font-bold text-lg md:text-2xl mb-6 leading-[30px]">
+              R&eacute;capitulatif Commande
             </h1>
-            <div className="border w-full max-w-[800px] mx-auto mb-4 shadow-xs flex flex-col gap-4 pt-12 pb-6 px-6">
+
+            <div className=" border shadow-xs flex flex-col gap-4 pt-6 pb-6 px-4 sm:px-6 md:px-8 lg:px-10 w-full">
               {items.length === 0 ? (
-                <p className="text-center text-gray-500">Votre panier est vide.</p>
+                <p className="text-center opacity-80 text-sm md:text-lg">
+                  Votre Panier Est Vide.
+                </p>
               ) : (
-                items.map((item) => (
-                  <CartItem key={item.id} {...item} />
-                ))
+                items.map((item) => <CartItem key={item.id} {...item} />)
               )}
             </div>
           </div>
 
           {/* Summary & Info */}
-          <div className="pt-8 px-4 max-w-full md:max-w-[600px]">
+          <div className="w-full max-w-[800px] mx-auto pt-8">
             <div className="mt-4">
               <h2 className="font-semibold text-base sm:text-lg inline-block border-b-2 border-primary mb-3 pb-1">
                 Informations Importantes
               </h2>
               <ul className="text-sm list-disc list-inside space-y-1">
-                <li>La réservation reste valable 48 heures.</li>
-                <li>Prévisualisation du produit en magasin avant achat.</li>
-                <li>Bijoux scellés et garantis.</li>
+                <li>La r&eacute;servation reste valable 48 heures.</li>
+                <li>
+                  Pr&eacute;visualisation du produit en magasin avant achat.
+                </li>
+                <li>Bijoux scell&eacute;s et garantis.</li>
                 <li>Emballage de luxe offert gratuitement.</li>
               </ul>
             </div>
@@ -73,13 +76,24 @@ const Page = () => {
               </p>
             </div>
 
-            <Link
-              href="/order"
-              className=" group bg-primary w-full text-white text-xs md:text-xl px-6 py-2 rounded-lg font-medium flex items-center justify-center gap-2 mt-6 hover:bg-primary/90 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              Réservez
-              <FiShoppingBag className="transition-transform duration-300 group-hover:translate-x-1"/>
-            </Link>
+            {items.length === 0 ? (
+              <Button
+                variant="outline"
+                disabled
+                className="w-full flex items-center justify-center gap-2 mt-6 cursor-not-allowed"
+              >
+                R&eacute;servez
+                <FiShoppingBag />
+              </Button>
+            ) : (
+              <Link
+                href="/order"
+                className="group bg-primary w-full text-white text-xs md:text-xl px-6 py-2 rounded-lg font-medium flex items-center justify-center gap-2 mt-6 hover:bg-primary/90 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                R&eacute;servez
+                <FiShoppingBag className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            )}
           </div>
         </div>
       </div>

@@ -5,8 +5,8 @@ export const userFormSchema = z.object({
   email: z.string().email("Adresse email invalide"),
   phone: z
     .string()
-    .min(6, "Numéro trop court")
-    .regex(/^[0-9+\s()-]+$/, "Numéro de téléphone invalide"),
+    .regex(/^0[5-7]\d{8}$/, "Numéro invalide"),
   wilaya: z.string().min(2, "Wilaya requise"),
+  baladiya: z.string().min(2, "Baladiya requise"),
   comment: z.string().optional(),
 });

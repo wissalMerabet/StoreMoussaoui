@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import Accordion from "../layout/Accordion";
 import { accordionItems } from "@/constants/data";
 import Questions from "../layout/Questions";
@@ -9,7 +8,7 @@ const FaqSection = () => {
     <section className="bg-white py-6">
       <div className="container mx-auto px-10 max-w-7xl">
         <h2 className="sub-heading-red-center ">
-          Questions fréquemment posées
+          Questions fr&eacute;quemment pos&eacute;es
         </h2>
 
         <div className="flex flex-col items-center gap-12 md:flex-row md:items-center md:justify-between">
@@ -32,7 +31,7 @@ const FaqSection = () => {
 
             <h3 className="text-xl md:text-2xl font-semibold">Des questions ?</h3>
             <p className="text-xs md:text-[14px] font-medium max-w-lg ">
-              Vous pouvez demander tout ce que vous voulez savoir Commentaires
+              Vous pouvez Demander tout ce Que vous voulez savoir Commentaires
             </p>
 
             <div className="w-full md:max-w-[500px] px-2 ">

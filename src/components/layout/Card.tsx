@@ -13,19 +13,16 @@ const Card = ({ product }: ProductCardProps) => {
   //console.log(`${API_URL}`);
   //console.log(`${product.thumbnail}`);
 
-
-
   return (
-    <div className="bg-white border p-2 shadow-sm hover:shadow-md transition w-full max-w-sm mx-auto rounded-md flex flex-col">
+    <div className="bg-white w-full border p-2 shadow-sm hover:shadow-md transition rounded-md flex flex-col h-full">
       {/* Image */}
-      <div className="relative w-full h-36 md:h-56 mb-2">
+      <div className="relative w-full h-34 sm:h-46 md:h-56 mb-2">
         <Image
           src={`${API_URL}${product.thumbnail}` || "/placeholder.svg"}
           alt={product.name}
-         fill
+          fill
           className="object-cover border border-border md:border-none rounded-md"
           sizes="(max-width: 768px) 100vw, 300px"
-          
         />
       </div>
 
@@ -42,7 +39,7 @@ const Card = ({ product }: ProductCardProps) => {
             alt="Check"
             width={24}
             height={24}
-            className="text-primary  -mt-1"
+            className="text-primary -mt-1"
           />
         </div>
       </div>
@@ -56,13 +53,14 @@ const Card = ({ product }: ProductCardProps) => {
           <p className="text-primary text-sm font-medium">
             {product.fixed_price}
           </p>
-          <Image
-            src="/images/shopping-bag.svg"
-            alt="Check"
-            width={24}
-            height={24}
-            className="text-primary"
-          />
+          <div className="relative w-4 h-4 md:w-8 md:h-8">
+            <Image
+              src="/images/shopping-bag.svg"
+              alt="Check"
+              fill
+              className="object-contain text-primary"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -14,19 +14,13 @@ export interface NewsLetterType {
 }
 
 export interface QuestionsType {
-  text: string
+  question: string
 }
 
-export interface UserFormData {
-  Nom: string,
-  email: string,
-  phone: string,
-  wilaya: string,
-  comment?: string,
-};
+
 
 export interface ReservationPayload {
-  id: number;
+  id?: number;
   client_name: string;
   client_email: string;
   client_phone: string;
@@ -48,6 +42,8 @@ export type NewsLetterValues = z.infer<typeof NewsLetterSchema>;
 export type UserFormDataValues = z.infer<typeof userFormSchema>;
 
 export type QuestionsValues = z.infer<typeof QuestionsSchema>;
+
+export type UserFormData = z.infer<typeof userFormSchema>;
 
 
 export interface RelatedEntity {

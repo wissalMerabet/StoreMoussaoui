@@ -19,7 +19,7 @@ export function FilterOptions({
   const selected = selectedFilters[key] || [];
 
   return (
-    <div className="grid md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {options.map((option) => {
         const val = slugify(option);
         const isChecked = selected.includes(val);
@@ -31,7 +31,7 @@ export function FilterOptions({
               checked={isChecked}
               onCheckedChange={() => onChange(filter, option)}
             />
-            <Label htmlFor={`${key}-${val}`} className="text-sm">
+            <Label htmlFor={`${key}-${val}`} className="text-[10px] md:text-sm">
               {option}
             </Label>
           </div>

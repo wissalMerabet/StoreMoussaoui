@@ -17,7 +17,7 @@ const sharedNavItems = [
   { title: "Bagues", link: "/products/bague" },
   { title: "Colliers", link: "/products/colliers" },
   { title: "Bracelets", link: "/products/bracelet" },
-  { title: "Boucles d’oreilles", link: "/products/boucles-d-oreilles" },
+  { title: "Boucles d’oreilles", link: "/products/boucles-doreilles" },
   { title: "Diamant", link: "/products/diamant" },
   { title: "Mariage", link: "/products/mariage" },
 ];
@@ -31,8 +31,8 @@ export const navbarData = {
 
 export const images = [
   '/images/img1.png',
-  '/images/img2.png',
-  '/images/img3.png',
+  '/images/img2.jpg',
+  '/images/img3.jpg',
 ];
 
 export interface MegaMenuItem {
@@ -395,19 +395,19 @@ export const accordionItems = [
 export const socialLinks = [
   {
     title: "Facebook",
-    link: "https://www.facebook.com/name",
+    link: "https://www.facebook.com/profile.php?id=61560222960547&mibextid=ZbWKwL",
     icons: FiFacebook,
     iconColor: "#0A142F",
   },
   {
     title: "Instagram",
-    link: "https://www.instagram.com/microbrains.tech/",
+    link: "https://www.instagram.com/bijoutriemoussaouimounir/",
     icons: FaInstagram,
     iconColor: "#0A142F",
   },
   {
     title: "Tiktok",
-    link: "https://www.Tiktok.com/",
+    link: "https://www.tiktok.com/@bijoutriemoussaouimounir?_t=ZM-8y1jVTEvBPJ&_r=1",
     icons: FaTiktok,
     iconColor: "#0A142F",
   },
@@ -418,24 +418,32 @@ export const socialLinks = [
 
 export const contactLinks = [
   {
-    title: "+213 123 456 789",
-    link: "",
+    title: "030 51 40 70",
+    link: "tel:030514070",
     icons: FiPhone,
     iconColor: "#0A142F",
   },
   {
-    title: "Contact@moussaoui.com",
-    link: "",
+    title: "mounirmoussaouibijouterie@gmail.com",
+    link: "mailto:mounirmoussaouibijouterie@gmail.com",
     icons: FaRegEnvelope,
     iconColor: "#0A142F",
   },
   {
-    title: "Jijel,Jijel,Algeria",
-    link: "",
+    title: "Camp Chevalier Jijel, Jijel, Algeria",
+    link: "https://l.facebook.com/l.php?u=https%3A%2F%2Fmaps.app.goo.gl%2Fybt3TFHWSCYZigFR9%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExdnVnWGw2Y3RvN2J3QjdsMgEeulBrLPKboTa-lFSFgTvdBa5TGE-MkVxYYIuN9ToIzMhRc40WRXpPp9rYEgI_aem_VZFyaLNzFLr9FjYk0lsMKg&h=AT214FGruLAvcSm--NiTlv1-MFfxo7zUMsYRw3xTNl4g1459Sb79xXeaqDx5VRR3hqHpelHVsz4p0gSoCf2SONcJrKLZZUir5RtUqtuJsJelyK0mS2WDaE_HYPK8q7NZh5JE",
     icons: HiOutlineLocationMarker,
     iconColor: "#0A142F",
   },
 
+];
+
+export const PRICE_RANGES = [
+  { label: "Petits prix", min: 0, max: 30000 },
+  { label: "Entre 30 000 DA et 80 000 DA", min: 30000, max: 80000 },
+  { label: "Entre 80 000 DA et 120 000 DA", min: 80000, max: 120000 },
+  { label: "Entre 120 000 DA et 200 000 DA", min: 120000, max: 200000 },
+  { label: "Plus de 200 000 DA", min: 200000, max: Infinity },
 ];
 
 

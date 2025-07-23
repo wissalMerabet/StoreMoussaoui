@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const Logo = () => {
   return (
-    <Link href="/" aria-label="Moussaoui Logo" className="block w-[140px] sm:w-[180px] md:w-[200px] lg:w-[232px] ">
+    <Link href="/" aria-label="Moussaoui Logo" className="block w-[120px] sm:w-[180px] md:w-[200px] lg:w-[232px] ">
           <Image
             src="/logo/figmaLogo.png"        
             alt="Moussaoui Logo"

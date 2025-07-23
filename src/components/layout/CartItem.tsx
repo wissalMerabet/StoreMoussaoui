@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useCart } from "@/context/CartContext";
 
@@ -25,9 +24,9 @@ const CartItem = ({
   const { updateQuantity, removeFromCart } = useCart();
 
   return (
-    <div className="relative flex gap-4   min-h-[140px] ">
+    <div className="relative flex gap-2 md:gap-4 min-h-[140px] ">
       {/* Image */}
-      <div className="w-38 relative shadow-sm flex-shrink-0">
+      <div className="w-30 md:w-38 relative shadow-sm flex-shrink-0">
         <Image
           src={thumbnail ? `${API_URL}${thumbnail}` : "/placeholder.svg"}
           alt={name}
@@ -44,7 +43,7 @@ const CartItem = ({
             {fixed_price?.toLocaleString?.() ?? "0"} DA
           </p>
           <p className="text-xs md:text-sm mt-1">
-            Bague En Or Pur 18 Carats
+            {name}
           </p>
         </div>
       </div>
@@ -55,24 +54,24 @@ const CartItem = ({
           onClick={() => removeFromCart(id)}
           className=""
         >
-          <RiDeleteBin5Line size={18} />
+          <RiDeleteBin5Line className="text-sm md:text-lg" />
         </button>
 
         {/* Quantity */}
-        <div className="flex border rounded-md overflow-hidden h-8">
+        <div className="flex border rounded-md overflow-hidden h-6 md:h-8">
           
           <button
             onClick={() => updateQuantity(id, Math.max(quantity - 1, 1))}
-            className="w-8 flex items-center justify-center text-sm font-semibold "
+            className="w-4 md:w-8 flex items-center justify-center text-[10px] md:text-sm font-semibold "
           >
             −
           </button>
-          <div className="w-8 flex items-center justify-center text-sm border-l border-r">
+          <div className="w-4 md:w-8 flex items-center justify-center text-[10px] md:text-sm border-l border-r">
             {quantity}
           </div>
           <button
             onClick={() => updateQuantity(id, quantity + 1)}
-            className="w-8 flex items-center justify-center text-sm font-semibold "
+            className="w-4 md:w-8 flex items-center justify-center text-[10px] md:text-sm font-semibold "
           >
             +
           </button>

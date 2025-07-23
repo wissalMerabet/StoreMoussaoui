@@ -7,17 +7,12 @@ import Link from "next/link";
 import { slugify } from "@/lib/utils";
 import type { Product } from "@/types";
 
-
-
 interface ProductScrollBarProps {
   products: Product[];
 }
 
 const ProductScrollBar = ({ products }: ProductScrollBarProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  
-  
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -55,7 +50,6 @@ const ProductScrollBar = ({ products }: ProductScrollBarProps) => {
 
   return (
     <div className="w-full relative py-10 px-4">
-      
       <button
         onClick={() => scroll("left")}
         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 px-2"
@@ -74,23 +68,23 @@ const ProductScrollBar = ({ products }: ProductScrollBarProps) => {
       <div
         ref={scrollRef}
         onScroll={handleLoop}
-        className="flex gap-2 overflow-x-auto scroll-smooth scrollbar-hide snap-x snap-mandatory "
+        className="flex gap-2 overflow-x-auto scrollbar-hide snap-x snap-mandatory "
       >
-        {products.map((product) => {
-          
-          return (
-            <div
-              key={product.id}
-              className="product-card snap-start w-[180px] sm:w-[220px] md:w-[260px] lg:w-[300px] flex-shrink-0"
-            >
-              <Link
-                href={`/products/${slugify(product.category?.name)}/${product.id}`}
-              >
-                <Card product={product} />
-              </Link>
-            </div>
-          );
-        })}
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="product-card snap-start 
+             flex-shrink-0 
+             w-[calc((100%-32px)*0.5)]   
+             sm:w-[calc((100%-32px)/3)]  
+             lg:w-[calc(1280px/4-1rem)]
+"
+          >
+            <Link href={`/products/${slugify(product.category?.name)}/${product.id}`}>
+              <Card product={product} />
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -7,9 +7,10 @@ import { MdOutlineAddBox } from "react-icons/md";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Product } from "@/types";
 import { slugify } from "@/lib/utils";
-
 import { useCart } from "@/context/CartContext";
 import MagicZoom from "./MagicZoom";
+import { useRouter } from "next/navigation";
+
 
 interface Props {
   product: Product;
@@ -19,6 +20,10 @@ const ProductDetail = ({ product }: Props) => {
   const categoryTitle = product.category?.name || "Inconnue";
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const { addToCart } = useCart();
+  const router = useRouter();
+
+  
+
 
   const handleAddToCart = () => {
     addToCart({
@@ -29,6 +34,16 @@ const ProductDetail = ({ product }: Props) => {
       quantity: 1,
     });
   };
+ const handleReserve = () => {
+  const query = new URLSearchParams({
+    direct: "true",
+    id: product.id.toString(),
+  });
+
+  router.push(`/order?${query.toString()}`);
+};
+
+
 
   return (
     <div className="bg-white text-[#383434] pt-18 sm:pt-22 md:pt-34 lg:pt-36 lg:pb-0">
@@ -45,7 +60,7 @@ const ProductDetail = ({ product }: Props) => {
             </Link>{" "}
             / <span className="px-1">{product.name}</span>
           </div>
-          <Link href="/" className="flex items-center gap-1">
+          <Link href={`/products/${slugify(categoryTitle)}`} className="flex items-center gap-1">
             <BsChevronLeft className="mt-0.5 md:mt-1" />
             Retour
           </Link>
@@ -91,7 +106,7 @@ const ProductDetail = ({ product }: Props) => {
 
             {/* Reserve */}
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
-              {/* Add to Cart Button */}
+             
               <button
                 onClick={handleAddToCart}
                 className="group w-full sm:w-1/2 text-primary border border-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm sm:text-base px-6 py-3 rounded-md font-semibold shadow-sm flex items-center justify-center gap-2 hover:shadow-lg hover:scale-[1.02]"
@@ -101,13 +116,13 @@ const ProductDetail = ({ product }: Props) => {
               </button>
 
               {/* Reserve Button */}
-              <Link
-                href="/order"
+              <button
+                onClick={handleReserve}
                 className="group w-full sm:w-1/2 bg-primary text-white text-sm sm:text-base px-6 py-3 rounded-md font-semibold shadow-md flex items-center justify-center gap-2 transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
-                Réservez
+                R&eacute;servez
                 <FiShoppingBag className="transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110" />
-              </Link>
+              </button>
             </div>
 
             {/* Important Info */}
@@ -116,9 +131,9 @@ const ProductDetail = ({ product }: Props) => {
                 Informations Importantes
               </h2>
               <ul className="text-sm list-disc list-inside space-y-1">
-                <li>La réservation reste valable 48 heures.</li>
-                <li>Prévisualisation du produit en magasin avant achat.</li>
-                <li>Bijoux scellés et garantis.</li>
+                <li>La r&eacute;servation reste valable 48 heures.</li>
+                <li>Pr&eacute;visualisation du produit en magasin avant achat.</li>
+                <li>Bijoux scell&eacute;s et garantis.</li>
                 <li>Emballage de luxe offert gratuitement.</li>
               </ul>
             </div>

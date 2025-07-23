@@ -1,4 +1,5 @@
 import FaqSection from "@/components/sections/FaqSection";
+import GoldPriceGrid from "@/components/sections/GoldPriceGrid";
 import Hero from "@/components/sections/Hero";
 import Newproduct from "@/components/sections/Newproduct";
 import Preview from "@/components/sections/Preview";
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <div className="relative">
       <Hero/>
+      <GoldPriceGrid />
       <ProductSection />
       <Preview />
       <Video />
